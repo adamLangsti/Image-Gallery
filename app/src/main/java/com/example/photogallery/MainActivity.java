@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     private final String image_titles [] = {
 
             "img1",
