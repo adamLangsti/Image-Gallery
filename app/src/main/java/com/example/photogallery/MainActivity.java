@@ -1,28 +1,32 @@
 package com.example.photogallery;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private List<ImageItem> imageList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private MyAdapter mAdapter;
 
     private final String image_titles [] = {
-
-            "img1",
-            "img2",
-            "img3",
-            "img4",
-            "img5",
-            "img6",
-            "img7",
-            "img8",
-            "img9",
-            "img10"
+            "Ocean",
+            "Waterfall",
+            "Lake",
+            "Path",
+            "Sunshine",
+            "Forest",
+            "D man",
+            "Gandalf",
+            "Meme 1",
+            "Meme 2"
     };
 
     private final Integer image_ids [] = {
@@ -37,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.image8,
             R.drawable.image9,
             R.drawable.image10
-
-
     };
 
     @Override
@@ -46,27 +48,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gallery);
+        recyclerView = (RecyclerView) findViewById(R.id.gallery);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Cell> cells = prepareData();
-        MyAdapter adapter = new MyAdapter(getApplicationContext(), cells);
-        recyclerView.setAdapter(adapter);
-
+        prepareData();
+        mAdapter = new MyAdapter(this, imageList);
+        recyclerView.setAdapter(mAdapter);
     }
 
-    private ArrayList<Cell> prepareData() {
-        ArrayList<Cell> theimage = new ArrayList<>();
+    private void prepareData() {
         for(int i = 0; i < image_titles.length; i++) {
-            Cell cell = new Cell();
-            cell.setTitle(image_titles[i]);
-            cell.setImg(image_ids[i]);
-            theimage.add(cell);
+            ImageItem imageItem = new ImageItem(image_titles[i],image_ids[i]);
+            imageList.add(imageItem);
         }
+    }
 
-        return theimage;
+    public void showImage(Integer index) {
+        Log.i("Info","Clicked on image!");
+
+        Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+        intent.putExtra("TITLE", "Image title");
+        intent.putExtra("IMAGE", R.drawable.image1 );
+        startActivity(intent);
     }
 }
