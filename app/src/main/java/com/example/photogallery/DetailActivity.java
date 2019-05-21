@@ -7,13 +7,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-
-
 public class DetailActivity extends AppCompatActivity {
 
     private String mTitle;
-    //private Image mImage;
     private TextView textView;
     private ImageView imageView;
 

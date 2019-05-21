@@ -67,11 +67,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showImage(Integer index) {
-        Log.i("Info","Clicked on image!");
 
         Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-        intent.putExtra("TITLE", "Image title");
-        intent.putExtra("IMAGE", R.drawable.image1 );
+        int imageUrl = image_ids[index];
+        intent.putExtra("IMAGE", imageUrl);
+        String imageTitle = image_titles[index];
+        intent.putExtra("TITLE",imageTitle);
+
         startActivity(intent);
     }
 }
