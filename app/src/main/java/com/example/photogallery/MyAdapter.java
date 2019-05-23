@@ -8,32 +8,38 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
 
-    private List<ImageItem> galleryList;
+
+    private ArrayList<ImageItem> galleryList;
     private MainActivity mMainActivity;
 
-    public MyAdapter(MainActivity activity, List<ImageItem> list) {
+    public MyAdapter(MainActivity activity, ArrayList<ImageItem> list)
+    {
         galleryList = list;
         mMainActivity = activity;
     }
 
     @NonNull
     @Override
-    public  ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
+    public  ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i)
+    {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell, viewGroup, false);
 
         return new ItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter.ItemViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(MyAdapter.ItemViewHolder viewHolder, final int i)
+    {
+        ImageItem imageItem = galleryList.get(i);
         viewHolder.title.setText(galleryList.get(i).getTitle());
-        viewHolder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        viewHolder.img.setImageResource(galleryList.get(i).getImg());
+        viewHolder.img.setImageBitmap(AssistClass.getBitmapFromString(galleryList.get(i).bitMap));
+
     }
 
     @Override
@@ -41,12 +47,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         return galleryList.size();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+        {
 
         TextView title;
         ImageView img;
 
-        public ItemViewHolder(View view){
+        public ItemViewHolder(View view)
+        {
             super(view);
 
             title = (TextView) view.findViewById(R.id.title);
@@ -57,7 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHolder> {
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             mMainActivity.showImage(getAdapterPosition());
         }
     }

@@ -19,6 +19,9 @@
         <activity android:name=".DetailActivity">
 
         </activity>
+        <activity android:name=".AddItemActivity">
+
+        </activity>
     </application>
 
 </manifest>
