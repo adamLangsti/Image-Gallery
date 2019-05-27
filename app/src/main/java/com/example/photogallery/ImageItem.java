@@ -42,13 +42,15 @@ public class ImageItem {
 
 
 
-    public ImageItem(JSONObject jo) throws JSONException {
+    public ImageItem(JSONObject jo) throws JSONException
+    {
         mTitle = jo.getString(JSON_TITLE);
     }
 
     public ImageItem(){}
 
-    public JSONObject convertToJSON() throws JSONException {
+    public JSONObject convertToJSON() throws JSONException
+    {
 
         JSONObject jo = new JSONObject();
 

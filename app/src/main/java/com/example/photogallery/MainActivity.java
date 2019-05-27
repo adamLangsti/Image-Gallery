@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadData();
 
 
         recyclerView = (RecyclerView) findViewById(R.id.gallery);
@@ -65,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.getAdapter().notifyDataSetChanged();
         Log.i("Info","Images count is" + mImageList.size());
 
-
-        loadData();
-
     }
 
     static void addItem(ImageItem item)
@@ -83,18 +81,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause()
+    {
         super.onPause();
         saveData();
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         loadData();
-
-
     }
+
     public void saveData()
     {
         String filename = "SaveData.json";
@@ -109,9 +108,8 @@ public class MainActivity extends AppCompatActivity {
             writer.close();
         }catch (Exception e)
         {
-            Log.e("Error", "Wrong", e);
+            Log.e("Error", "Could not load image", e);
         }
-
     }
 
     private void loadData()
@@ -131,9 +129,8 @@ public class MainActivity extends AppCompatActivity {
             reader.close();
         }catch (Exception e)
         {
-            Log.e("Error", "Wrong", e);
+            Log.e("Error", "Could not load image", e);
         }
 
     }
-
 }
